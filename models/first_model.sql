@@ -1,1 +1,0 @@
-select * from `aesthetic-hub-417907.jaffle_shop.customers`
