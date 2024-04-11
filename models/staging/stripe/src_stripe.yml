@@ -5,11 +5,22 @@ sources:
       database: raw
       tables:
         - name: payment
-        - name: id
-          description: Primary key for payment
-          tests:
-            - not_null
-            - unique
+          columns:
+            - name: id
+              description: primary key for payment
+              tests:
+                - unique :
+                    config:
+                      severity: warn
+                      warn_if: ">10"
+                      error_if: ">100"
+            - name: paymentmethod 
+              tests:
+                - accepted_values:
+                    values: ['credit_card', 'bank_transfer', 'coupon','gift_card']
+                    config: 
+                      where : "status is success"
+                  
             
-            
+
         

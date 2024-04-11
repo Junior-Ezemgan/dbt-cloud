@@ -9,9 +9,15 @@ models:
           tests:
             - unique
             - not_null
+            - dbt_utils.cardinality_equality:
+                field: id
+                to: source("jaffle_shop", "customers")
 
     - name: stg_orders
       description: Staged order data from our jaffle shop app.
+      tests:
+        - dbt_utils.expression_is_true:
+            expression: "customer_id is not null"
       columns: 
         - name: order_id
           description: Primary key for orders.
